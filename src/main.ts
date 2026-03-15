@@ -40,7 +40,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 
 		this.addCommand({
 			id: "add-sketch",
-			name: "Add Sketch from iPad",
+			name: "Add sketch from iPad",
 			editorCallback: (editor: Editor) => this.addSketch(editor),
 		});
 
@@ -90,6 +90,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 		}
 		const vaultPath = adapter.getBasePath();
 		const attachmentFolder: string =
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			(this.app.vault as any).getConfig("attachmentFolderPath") ?? "";
 
 		if (attachmentFolder.startsWith("./")) {
@@ -105,6 +106,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 	}
 
 	private formatImageEmbed(filename: string): string {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const useMarkdownLinks = (this.app.vault as any).getConfig("useMarkdownLinks");
 		if (useMarkdownLinks) {
 			return `![sketch](${encodeURI(filename)})`;
@@ -132,7 +134,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 		}
 
 		const drawingId = randomUUID();
-		new Notice("Waiting for sketch from iPad...", 5_000);
+		new Notice("Waiting for sketch from iPad…", 5_000);
 
 		let result: SketchResult;
 		try {
@@ -200,7 +202,7 @@ class ContinuitySketchSettingTab extends PluginSettingTab {
 
 		if (process.platform !== "darwin") {
 			containerEl.createEl("p", {
-				text: "This plugin only works on macOS. It requires Apple Continuity Sketch, which is a macOS-exclusive feature.",
+				text: "This plugin only works on macOS and requires the boofa-sketch helper.",
 				cls: "mod-warning",
 			});
 		}
@@ -221,7 +223,7 @@ class ContinuitySketchSettingTab extends PluginSettingTab {
 					}),
 			);
 
-		this.showBinaryStatus(containerEl);
+		void this.showBinaryStatus(containerEl);
 	}
 
 	private async showBinaryStatus(containerEl: HTMLElement): Promise<void> {
@@ -232,7 +234,7 @@ class ContinuitySketchSettingTab extends PluginSettingTab {
 			statusEl.addClass("mod-success");
 		} else {
 			statusEl.setText(
-				"boofa-sketch not found. Install with: brew install wasmir/tap/boofa-sketch",
+				"Helper not found, run: brew install wasmir/tap/boofa-sketch",
 			);
 			statusEl.addClass("mod-warning");
 		}
