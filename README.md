@@ -6,7 +6,7 @@ Draw on a nearby iPad with Apple Pencil via Apple Continuity Sketch and insert t
 
 ## Prerequisites
 
-Install the helper binary:
+Install the helper binary ([boofa-sketch](https://github.com/wasmir/boofa-sketch)):
 
 ```bash
 brew install wasmir/tap/boofa-sketch

@@ -116,7 +116,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 		const binaryPath = await this.findBinary();
 		if (!binaryPath) {
 			new Notice(
-				"boofa-sketch not found.\nInstall with: brew install wasmir/tap/boofa-sketch",
+				"boofa-sketch not found.\nInstall with: brew install wasmir/tap/boofa-sketch\nhttps://github.com/wasmir/boofa-sketch",
 				10_000,
 			);
 			return;
