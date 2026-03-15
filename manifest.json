@@ -1,0 +1,10 @@
+{
+	"id": "continuity-sketch",
+	"name": "Continuity Sketch",
+	"version": "1.0.0",
+	"minAppVersion": "1.0.0",
+	"description": "Draw on a nearby iPad with Apple Pencil via Continuity Sketch and insert the image into your note.",
+	"author": "wasmir",
+	"authorUrl": "https://github.com/wasmir",
+	"isDesktopOnly": true
+}

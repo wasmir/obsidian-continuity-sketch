@@ -1,0 +1,19 @@
+# IDE
+.vscode
+*.iml
+.idea
+
+# npm
+node_modules
+
+# Build output
+main.js
+
+# Sourcemaps
+*.map
+
+# Obsidian settings data
+data.json
+
+# macOS
+.DS_Store
