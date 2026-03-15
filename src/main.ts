@@ -89,8 +89,8 @@ export default class ContinuitySketchPlugin extends Plugin {
 			throw new Error("FileSystemAdapter required");
 		}
 		const vaultPath = adapter.getBasePath();
-		const vault = this.app.vault as unknown as { getConfig(key: string): unknown };
-		const attachmentFolder = String(vault.getConfig("attachmentFolderPath") ?? "");
+		const vault = this.app.vault as unknown as { getConfig(key: string): string };
+		const attachmentFolder: string = vault.getConfig("attachmentFolderPath") ?? "";
 
 		if (attachmentFolder.startsWith("./")) {
 			const activeFile = this.app.workspace.getActiveFile();
