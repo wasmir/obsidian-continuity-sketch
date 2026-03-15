@@ -40,7 +40,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 
 		this.addCommand({
 			id: "add-sketch",
-			name: "Add sketch from iPad",
+			name: "Add sketch from device",
 			editorCallback: (editor: Editor) => this.addSketch(editor),
 		});
 
@@ -89,9 +89,8 @@ export default class ContinuitySketchPlugin extends Plugin {
 			throw new Error("FileSystemAdapter required");
 		}
 		const vaultPath = adapter.getBasePath();
-		const attachmentFolder: string =
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			(this.app.vault as any).getConfig("attachmentFolderPath") ?? "";
+		const vault = this.app.vault as unknown as { getConfig(key: string): unknown };
+		const attachmentFolder = String(vault.getConfig("attachmentFolderPath") ?? "");
 
 		if (attachmentFolder.startsWith("./")) {
 			const activeFile = this.app.workspace.getActiveFile();
@@ -106,8 +105,8 @@ export default class ContinuitySketchPlugin extends Plugin {
 	}
 
 	private formatImageEmbed(filename: string): string {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const useMarkdownLinks = (this.app.vault as any).getConfig("useMarkdownLinks");
+		const vault = this.app.vault as unknown as { getConfig(key: string): unknown };
+		const useMarkdownLinks = vault.getConfig("useMarkdownLinks");
 		if (useMarkdownLinks) {
 			return `![sketch](${encodeURI(filename)})`;
 		}
@@ -134,7 +133,7 @@ export default class ContinuitySketchPlugin extends Plugin {
 		}
 
 		const drawingId = randomUUID();
-		new Notice("Waiting for sketch from iPad…", 5_000);
+		new Notice("Waiting for sketch from device…", 5_000);
 
 		let result: SketchResult;
 		try {
